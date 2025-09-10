@@ -32,6 +32,13 @@ struct ContentView: View {
                     .buttonStyle(.borderedProminent)
                 }
 
+                Button("Use Current Location") {
+                    vm.useCurrentLocations(units: appState.preferredUnits)
+                }.buttonStyle(.bordered)
+                if vm.isLoading {
+                    ActivitySpinner()
+                }
+
                 if let temp = vm.temperatureText, let desc = vm.descriptionText {
                     InfoRow(title: "Now", value: "\(temp) • \(desc)")
                         .transition(.opacity)
