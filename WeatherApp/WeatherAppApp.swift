@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct WeatherAppApp: App {
+    @StateObject private var appState = AppState()
+    
+    init() {
+        print("✅ Loaded API Key:", Secrets.weatherAPIKey)
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(appState)
         }
     }
 }
