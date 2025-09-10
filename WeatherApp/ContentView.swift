@@ -20,10 +20,17 @@ struct ContentView: View {
                     Text("Imperial (°F)").tag(AppState.Units.imperial)
                 }
                 .pickerStyle(.segmented)
-
-
-                
-
+                HStack {
+                    TextField("Enter city (e.g., Atlanta)", text: $vm.cityQuery)
+                        .textFieldStyle(.roundedBorder)
+                        .submitLabel(.search)
+                        .onSubmit { vm.search(units: appState.preferredUnits) }
+                    
+                    Button("Go") {
+                        vm.search(units: appState.preferredUnits)
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
 
                 if let temp = vm.temperatureText, let desc = vm.descriptionText {
                     InfoRow(title: "Now", value: "\(temp) • \(desc)")
